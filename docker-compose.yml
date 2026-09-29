@@ -102,6 +102,17 @@ services:
       - 9090:9090
     networks:
       - qb1tycinema
+      
+  jaeger:
+    container_name: jaeger
+    image: jaegertracing/all-in-one:1.47
+    restart: unless-stopped
+    ports:
+      - 16686:16686
+      - 4317:4317
+      - 4318:4318
+    networks:
+      - qb1tycinema
 
   grafana:
     container_name: grafana
