@@ -114,6 +114,30 @@ services:
     networks:
       - qb1tycinema
 
+  loki:
+    container_name: loki
+    image: grafana/loki:2.9.1
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./loki-config.yml:/etc/loki/config.yaml
+      - ./loki-data:/loki
+      - ./loki-wal:/wal
+    command: -config.file=/etc/loki/config.yaml -config.expand-env=true
+    networks:
+      - qb1tycinema
+
+  promtail:
+    container_name: promtail
+    image: grafana/promtail:2.9.1
+    volumes:
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - ../logs:/var/log/services
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - qb1tycinema
+
   grafana:
     container_name: grafana
     image: grafana/grafana:10.2.3
