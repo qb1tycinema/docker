@@ -1,1 +1,4 @@
+loki-data
+loki-wal
+logs
 .env
