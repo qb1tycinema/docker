@@ -48,3 +48,11 @@ scrape_configs:
           job: media
           service: media-service
           __path__: /var/log/services/media/*.log
+
+  - job_name: movie-logs
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: movie
+          service: movie-service
+          __path__: /var/log/services/movie/*.log
